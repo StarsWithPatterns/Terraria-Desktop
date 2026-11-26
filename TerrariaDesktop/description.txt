@@ -1,0 +1,5 @@
+Terraria Desktop puts your live character on your Windows desktop.
+
+Every frame, the mod draws your player (armor, vanity, dyes, wings, animations) with the game's own player renderer and streams the picture to the Terraria Desktop overlay app, which shows it walking along the top of your taskbar.
+
+Start the DesktopOverlay app, then enter a world. See the GitHub page for setup.

@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build overlay app (TerrariaDesktopOverlay.exe)
+        run: >
+          dotnet publish DesktopOverlay/DesktopOverlay.csproj -c Release -r win-x64
+          --self-contained true -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true
+          -o out/overlay
+
+      - name: Download tModLoader
+        run: |
+          curl -sSL -o tml.zip https://github.com/tModLoader/tModLoader/releases/latest/download/tModLoader.zip
+          unzip -q tml.zip -d tml
+
+      - name: Build mod (TerrariaDesktop.tmod)
+        run: |
+          mkdir -p modsrc
+          echo "<Project><Import Project=\"$GITHUB_WORKSPACE/tml/tMLMod.targets\" /></Project>" > modsrc/tModLoader.targets
+          cp -r TerrariaDesktop modsrc/
+          dotnet build modsrc/TerrariaDesktop/TerrariaDesktop.csproj -c Release
+          mkdir -p out/mod
+          cp ~/.local/share/Terraria/tModLoader/Mods/TerrariaDesktop.tmod out/mod/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TerrariaDesktop
+          path: |
+            out/overlay/TerrariaDesktopOverlay.exe
+            out/mod/TerrariaDesktop.tmod
