@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <AssemblyName>TerrariaDesktopOverlay</AssemblyName>
+    <RootNamespace>DesktopOverlay</RootNamespace>
+    <Version>0.1.0</Version>
+    <!-- Lets the project build on Linux/macOS CI too; it still only runs on Windows. -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Same as UseWindowsForms, spelled out so the project also builds with SDKs that lack the WindowsDesktop workload. -->
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+    <Using Include="System.Drawing" />
+    <Using Include="System.Windows.Forms" />
+    <EmbeddedResource Include="app.ico" />
+  </ItemGroup>
+</Project>

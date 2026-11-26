@@ -1,0 +1,6 @@
+displayName = Terraria Desktop
+author = StarsWithPatterns
+version = 0.1.0
+homepage = https://github.com/StarsWithPatterns/Terraria-Desktop
+side = Client
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*

@@ -1,0 +1,29 @@
+Configs: {
+	DesktopConfig: {
+		DisplayName: Terraria Desktop
+
+		Enabled: {
+			Label: Send my character to the desktop
+			Tooltip: Turn this off to stop streaming your character to the overlay app.
+		}
+
+		IgnoreWorldLighting: {
+			Label: Draw at full brightness
+			Tooltip: When on, your desktop character looks like it does on the character select screen, even if you are standing in a dark cave.
+		}
+
+		FramesPerSecond: {
+			Label: Frames per second
+			Tooltip: How often the character picture is sent to the overlay. Lower this if you notice any slowdown.
+		}
+
+		Port: {
+			Label: Local port
+			Tooltip:
+				'''
+				The port on this computer that the overlay app connects to.
+				If you change it, start the overlay with --port <number> too.
+				'''
+		}
+	}
+}
